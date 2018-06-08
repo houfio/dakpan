@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should update the store 1`] = `
+<Component>
+  world
+</Component>
+`;
+
+exports[`should update the store 2`] = `
+<Component>
+  world!
+</Component>
+`;
+
+exports[`should update the store asynchronously 1`] = `
+<Component>
+  0
+</Component>
+`;
+
+exports[`should update the store asynchronously 2`] = `
+<Component>
+  1
+</Component>
+`;

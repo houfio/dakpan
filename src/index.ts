@@ -1,0 +1,1 @@
+export { createDakpan } from './createDakpan';
