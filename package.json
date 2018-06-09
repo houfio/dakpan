@@ -9,7 +9,8 @@
     "prebuild": "npm run lint && npm run test",
     "build": "rimraf lib/ && tsc --declaration && webpack",
     "test": "jest",
-    "lint": "tslint \"src/**/*.ts?(x)\""
+    "lint": "tslint \"src/**/*.ts?(x)\"",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",

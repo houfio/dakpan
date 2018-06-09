@@ -78,6 +78,27 @@ it('should update the store asynchronously', async () => {
   expect(wrapper.update()).toMatchSnapshot();
 });
 
+it('should update the store as event handler', () => {
+  const { dakpan: { Provider, Consumer, actions } } = createMockDakpan();
+
+  const wrapper = mount(
+    <Provider>
+      <Consumer>
+        {({ hello }) => (
+          <>
+            <span>{hello}</span>
+            <button onClick={actions.append.e('!')}/>
+          </>
+        )}
+      </Consumer>
+    </Provider>
+  );
+
+  expect(wrapper).toMatchSnapshot();
+  wrapper.find('button').simulate('click');
+  expect(wrapper.update()).toMatchSnapshot();
+});
+
 it('should call an action with the correct parameters', () => {
   const { dakpan: { Provider, actions }, mockAction } = createMockDakpan();
 
@@ -88,6 +109,11 @@ it('should call an action with the correct parameters', () => {
   );
 
   actions.mock('hello!');
+  const e = actions.mock.e('hello!!');
 
   expect(mockAction).toBeCalledWith('hello!');
+
+  e();
+
+  expect(mockAction).toBeCalledWith('hello!!');
 });

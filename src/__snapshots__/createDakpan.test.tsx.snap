@@ -12,6 +12,28 @@ exports[`should update the store 2`] = `
 </Component>
 `;
 
+exports[`should update the store as event handler 1`] = `
+<Component>
+  <span>
+    world
+  </span>
+  <button
+    onClick={[Function]}
+  />
+</Component>
+`;
+
+exports[`should update the store as event handler 2`] = `
+<Component>
+  <span>
+    world!
+  </span>
+  <button
+    onClick={[Function]}
+  />
+</Component>
+`;
+
 exports[`should update the store asynchronously 1`] = `
 <Component>
   0

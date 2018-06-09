@@ -17,9 +17,8 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
     Provider: provider,
     Consumer,
     actions: Object.keys(actions).reduce(
-      (result, key) => ({
-        ...result,
-        [ key ]: (...args: any[]) => {
+      (result, key) => {
+        const e = (...args: any[]) => () => {
           const action = actions[ key ];
 
           if (!getState || !setState) {
@@ -42,8 +41,16 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
           }
 
           setState(result as Pick<S, keyof S>);
-        }
-      }),
+        };
+
+        const action: any = (...args: any[]) => e(...args)();
+        action.e = e;
+
+        return {
+          ...result,
+          [ key ]: action
+        };
+      },
       {}
     ) as any
   };

@@ -28,7 +28,7 @@ const Component = () => (
       {({ hello }) => (
         <>
           <span>Hello {hello}</span>
-          <button onClick={() => actions.append('!')}>Add</button>
+          <button onClick={actions.append.e('!')}>Add</button>
         </>
       )}
     </Consumer>
@@ -90,10 +90,13 @@ A component that gives its child access to the state.
 
 #### `actions`
 
-An object with the same keys as the input actions with functions that take the action parameters. Returns a promise when the action is asynchronous, otherwise returns void.
+An object with the same keys as the input actions with functions that take the action parameters. Returns a promise when the action is asynchronous, otherwise returns void. The function also has the function `e`, which returns another function for use as an event handler.
 
 ```ts
 {
   append: (append: string) => void
 }
+
+append('!'); // executes immediately
+append.e('!'); // executes when called
 ```

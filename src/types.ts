@@ -19,8 +19,16 @@ export type Actions<S> = {
 };
 
 export type MappedActions<S, A extends Actions<S>> = {
-  [N in keyof A]: (...args: any[]) => ReturnType<ReturnType<A[N]>> extends Promise<Partial<S>> ? Promise<void> : void
+  [N in keyof A]: Action<S, A, N>
 };
+
+export type Action<S, A extends Actions<S>, N extends keyof A> = {
+  (...args: any[]): ActionReturn<S, A, N>,
+  e: (...args: any[]) => () => ActionReturn<S, A, N>
+};
+
+export type ActionReturn<S, A extends Actions<S>, N extends keyof A> =
+  ReturnType<ReturnType<A[N]>> extends Promise<Partial<S>> ? Promise<void> : void;
 
 export type GetState<S> = () => S;
 
