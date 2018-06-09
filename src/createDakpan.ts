@@ -8,6 +8,16 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
   let getState: GetState<S> | undefined;
   let setState: SetState<S, DakpanProviderProps> | undefined;
 
+  const mergeAction = (result: Partial<S>) => {
+    if (!setState) {
+      throw new Error('Provider unmounted before action could complete');
+    } else if (typeof result !== 'object') {
+      throw new Error('Actions may only return objects');
+    }
+
+    setState(result as Pick<S, keyof S>);
+  };
+
   const { Provider, Consumer } = createContext<S>(initialState);
   const mappedActions = Object.keys(actions).reduce(
     (result, key) => {
@@ -21,19 +31,11 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
         const state = getState();
         const result = action(...args)(state);
 
-        if (typeof result !== 'object') {
-          throw new Error('Actions may only return objects');
-        } else if (result instanceof Promise) {
-          return result.then((value) => {
-            if (!setState) {
-              throw new Error('Provider unmounted before action could complete');
-            }
-
-            setState(value as Pick<S, keyof S>);
-          });
+        if (result instanceof Promise) {
+          return result.then(mergeAction);
         }
 
-        setState(result as Pick<S, keyof S>);
+        mergeAction(result);
       };
 
       const action: any = (...args: any[]) => e(...args)();
