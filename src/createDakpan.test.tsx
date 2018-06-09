@@ -22,7 +22,8 @@ const createMockDakpan = () => {
         mockAction(test);
 
         return {};
-      }
+      },
+      error: () => () => 'error' as any
     }),
     mockUpdate,
     mockAction
@@ -116,4 +117,16 @@ it('should call an action with the correct parameters', () => {
   e();
 
   expect(mockAction).toBeCalledWith('hello!!');
+});
+
+it('should throw when the action doesn\'t return an object', () => {
+  const { dakpan: { Provider, actions } } = createMockDakpan();
+
+  mount(
+    <Provider>
+      <div/>
+    </Provider>
+  );
+
+  expect(actions.error.e()).toThrow('Actions may only return objects');
 });
