@@ -2,7 +2,7 @@ import { ComponentType, ReactNode } from 'react';
 
 export type Dakpan<S, A extends Actions<S>> = {
   Provider: ComponentType<DakpanProviderProps>,
-  Consumer: ComponentType<DakpanConsumerProps<S>>,
+  Consumer: ComponentType<DakpanConsumerProps<S, A>>,
   actions: MappedActions<S, A>
 };
 
@@ -10,12 +10,12 @@ export type DakpanProviderProps = {
   children: ReactNode
 };
 
-export type DakpanConsumerProps<S> = {
-  children: (state: S) => ReactNode
+export type DakpanConsumerProps<S, A extends Actions<S>> = {
+  children: (state: S, actions: MappedActions<S, A>) => ReactNode
 };
 
 export type Actions<S> = {
-  [ action: string ]: (...args: any[]) => (state: S) => Partial<S> | Promise<Partial<S>>
+  [action: string]: (...args: any[]) => (state: S) => Partial<S> | Promise<Partial<S>>
 };
 
 export type MappedActions<S, A extends Actions<S>> = {

@@ -1,47 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should pass the actions to the consumer 1`] = `
+<Component>
+  <Component>
+    <span>
+      world
+    </span>
+    <button
+      onClick={[Function]}
+    />
+  </Component>
+</Component>
+`;
+
+exports[`should pass the actions to the consumer 2`] = `
+<Component>
+  <Component>
+    <span>
+      world!
+    </span>
+    <button
+      onClick={[Function]}
+    />
+  </Component>
+</Component>
+`;
+
 exports[`should update the store 1`] = `
 <Component>
-  world
+  <Component>
+    world
+  </Component>
 </Component>
 `;
 
 exports[`should update the store 2`] = `
 <Component>
-  world!
+  <Component>
+    world!
+  </Component>
 </Component>
 `;
 
 exports[`should update the store as event handler 1`] = `
 <Component>
-  <span>
-    world
-  </span>
-  <button
-    onClick={[Function]}
-  />
+  <Component>
+    <span>
+      world
+    </span>
+    <button
+      onClick={[Function]}
+    />
+  </Component>
 </Component>
 `;
 
 exports[`should update the store as event handler 2`] = `
 <Component>
-  <span>
-    world!
-  </span>
-  <button
-    onClick={[Function]}
-  />
+  <Component>
+    <span>
+      world!
+    </span>
+    <button
+      onClick={[Function]}
+    />
+  </Component>
 </Component>
 `;
 
 exports[`should update the store asynchronously 1`] = `
 <Component>
-  0
+  <Component>
+    0
+  </Component>
 </Component>
 `;
 
 exports[`should update the store asynchronously 2`] = `
 <Component>
-  1
+  <Component>
+    1
+  </Component>
 </Component>
 `;

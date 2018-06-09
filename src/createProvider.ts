@@ -31,8 +31,9 @@ export const createProvider = <S>(
     const { children } = this.props;
 
     return createElement(Provider, {
-      value: this.state
-    }, children);
+      value: this.state,
+      children
+    });
   }
 
   public getState = () => this.state;

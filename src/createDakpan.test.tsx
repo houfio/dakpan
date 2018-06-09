@@ -58,7 +58,9 @@ it('should update the store', () => {
   );
 
   expect(wrapper).toMatchSnapshot();
-  expect(actions.append('!')).toBe(undefined);
+
+  actions.append('!');
+
   expect(wrapper.update()).toMatchSnapshot();
 });
 
@@ -74,7 +76,9 @@ it('should update the store asynchronously', async () => {
   );
 
   expect(wrapper).toMatchSnapshot();
-  expect(await actions.increment()).toBe(undefined);
+
+  await actions.increment();
+
   expect(mockUpdate).toBeCalledWith(0);
   expect(wrapper.update()).toMatchSnapshot();
 });
@@ -129,4 +133,25 @@ it('should throw when the action doesn\'t return an object', () => {
   );
 
   expect(actions.error.e()).toThrow('Actions may only return objects');
+});
+
+it('should pass the actions to the consumer', () => {
+  const { dakpan: { Provider, Consumer } } = createMockDakpan();
+
+  const wrapper = mount(
+    <Provider>
+      <Consumer>
+        {({ hello }, { append }) => (
+          <>
+            <span>{hello}</span>
+            <button onClick={append.e('!')}/>
+          </>
+        )}
+      </Consumer>
+    </Provider>
+  );
+
+  expect(wrapper).toMatchSnapshot();
+  wrapper.find('button').simulate('click');
+  expect(wrapper.update()).toMatchSnapshot();
 });
