@@ -80,11 +80,11 @@ A component that should wrap all of the consumers. Without this component mounte
 
 #### `Consumer`
 
-A component that gives its child access to the state.
+A component that gives its child access to the state. Also passes the actions for ease of use.
 
 ```ts
 <Consumer>
-  {(state) => /** children with access to the state */}
+  {(state, actions) => /** children with access to the state and actions */}
 </Consumer>
 ```
 
