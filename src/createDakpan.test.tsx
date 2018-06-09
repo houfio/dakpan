@@ -42,7 +42,7 @@ it('should initialize the dakpan', () => {
 it('should throw when an action is dispatched before its provider is mounted', () => {
   const { dakpan: { actions } } = createMockDakpan();
 
-  expect(() => actions.append('!')).toThrow('You may not dispatch an action before its provider is mounted');
+  expect(actions.append.e('!')).toThrow('You may not dispatch an action before its provider is mounted');
 });
 
 it('should update the store', () => {
