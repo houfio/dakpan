@@ -15,8 +15,10 @@ export type DakpanConsumerProps<S, A extends Actions<S>> = {
 };
 
 export type Actions<S> = {
-  [action: string]: (...args: any[]) => (state: S) => Partial<S> | Promise<Partial<S>>
+  [action: string]: Action<S>
 };
+
+export type Action<S> = (...args: any[]) => (state: S) => Partial<S> | Promise<Partial<S>>;
 
 export type MappedActions<S, A extends Actions<S>> = {
   [N in keyof A]: MappedAction<S, A[N], false> & {
