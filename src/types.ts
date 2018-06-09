@@ -19,16 +19,33 @@ export type Actions<S> = {
 };
 
 export type MappedActions<S, A extends Actions<S>> = {
-  [N in keyof A]: Action<S, A, N>
+  [N in keyof A]: MappedAction<S, A[N], false> & {
+    e: MappedAction<S, A[N], true>
+  }
 };
 
-export type Action<S, A extends Actions<S>, N extends keyof A> = {
-  (...args: any[]): ActionReturn<S, A, N>,
-  e: (...args: any[]) => () => ActionReturn<S, A, N>
-};
+type IsValidArg<T> = T extends object ? keyof T extends never ? false : true : true;
 
-export type ActionReturn<S, A extends Actions<S>, N extends keyof A> =
-  ReturnType<ReturnType<A[N]>> extends Promise<Partial<S>> ? Promise<void> : void;
+// tslint:disable
+type MappedAction<XS, XF extends (...args: any[]) => any, XD extends boolean> =
+  XF extends (a: infer A, b: infer B, c: infer C, d: infer D, e: infer E, f: infer F, g: infer G, h: infer H, i: infer I, j: infer J) => infer R ? (
+    IsValidArg<J> extends true ? (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => ActionReturn<XS, XF, XD> :
+      IsValidArg<I> extends true ? (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => ActionReturn<XS, XF, XD> :
+        IsValidArg<H> extends true ? (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => ActionReturn<XS, XF, XD> :
+          IsValidArg<G> extends true ? (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => ActionReturn<XS, XF, XD> :
+            IsValidArg<F> extends true ? (a: A, b: B, c: C, d: D, e: E, f: F) => ActionReturn<XS, XF, XD> :
+              IsValidArg<E> extends true ? (a: A, b: B, c: C, d: D, e: E) => ActionReturn<XS, XF, XD> :
+                IsValidArg<D> extends true ? (a: A, b: B, c: C, d: D) => ActionReturn<XS, XF, XD> :
+                  IsValidArg<C> extends true ? (a: A, b: B, c: C) => ActionReturn<XS, XF, XD> :
+                    IsValidArg<B> extends true ? (a: A, b: B) => ActionReturn<XS, XF, XD> :
+                      IsValidArg<A> extends true ? (a: A) => ActionReturn<XS, XF, XD> :
+                        () => ActionReturn<XS, XF, XD>
+    ) : never;
+
+
+export type ActionReturn<S, F extends (...args: any[]) => any, D extends boolean> =
+  ReturnType<ReturnType<F>> extends Promise<Partial<S>> ? D extends true ? () => Promise<void> : Promise<void> : D extends true ? () => void : void;
+// tslint:enable
 
 export type GetState<S> = () => S;
 

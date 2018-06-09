@@ -8,7 +8,7 @@ const createMockDakpan = () => {
   const mockAction = jest.fn();
 
   return {
-    dakpan: createDakpan({
+    ...createDakpan({
       hello: 'world',
       test: 0
     })({
@@ -31,7 +31,7 @@ const createMockDakpan = () => {
 };
 
 it('should initialize the dakpan', () => {
-  const { dakpan: { Provider, Consumer, actions } } = createMockDakpan();
+  const { Provider, Consumer, actions } = createMockDakpan();
 
   expect(Provider).toBeDefined();
   expect(Consumer).toBeDefined();
@@ -41,13 +41,13 @@ it('should initialize the dakpan', () => {
 });
 
 it('should throw when an action is dispatched before its provider is mounted', () => {
-  const { dakpan: { actions } } = createMockDakpan();
+  const { actions } = createMockDakpan();
 
   expect(actions.append.e('!')).toThrow('You may not dispatch an action before its provider is mounted');
 });
 
 it('should update the store', () => {
-  const { dakpan: { Provider, Consumer, actions } } = createMockDakpan();
+  const { Provider, Consumer, actions } = createMockDakpan();
 
   const wrapper = mount(
     <Provider>
@@ -65,7 +65,7 @@ it('should update the store', () => {
 });
 
 it('should update the store asynchronously', async () => {
-  const { dakpan: { Provider, Consumer, actions }, mockUpdate } = createMockDakpan();
+  const { Provider, Consumer, actions, mockUpdate } = createMockDakpan();
 
   const wrapper = mount(
     <Provider>
@@ -84,7 +84,7 @@ it('should update the store asynchronously', async () => {
 });
 
 it('should update the store as event handler', () => {
-  const { dakpan: { Provider, Consumer, actions } } = createMockDakpan();
+  const { Provider, Consumer, actions } = createMockDakpan();
 
   const wrapper = mount(
     <Provider>
@@ -105,7 +105,7 @@ it('should update the store as event handler', () => {
 });
 
 it('should call an action with the correct parameters', () => {
-  const { dakpan: { Provider, actions }, mockAction } = createMockDakpan();
+  const { Provider, actions, mockAction } = createMockDakpan();
 
   mount(
     <Provider>
@@ -124,7 +124,7 @@ it('should call an action with the correct parameters', () => {
 });
 
 it('should throw when the action doesn\'t return an object', () => {
-  const { dakpan: { Provider, actions } } = createMockDakpan();
+  const { Provider, actions } = createMockDakpan();
 
   mount(
     <Provider>
@@ -136,7 +136,7 @@ it('should throw when the action doesn\'t return an object', () => {
 });
 
 it('should pass the actions to the consumer', () => {
-  const { dakpan: { Provider, Consumer } } = createMockDakpan();
+  const { Provider, Consumer } = createMockDakpan();
 
   const wrapper = mount(
     <Provider>
