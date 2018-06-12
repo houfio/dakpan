@@ -9,13 +9,20 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
   let setState: SetState<S, DakpanProviderProps> | undefined;
 
   const mergeAction = (result: Partial<S>) => {
-    if (!setState) {
+    if (!getState || !setState) {
       throw new Error('Provider unmounted before action could complete');
     } else if (typeof result !== 'object') {
       throw new Error('Actions may only return objects');
     }
 
-    setState(result as Pick<S, keyof S>);
+    const newState = {
+      ...getState() as any,
+      ...result as any
+    };
+
+    setState(newState);
+
+    return newState;
   };
 
   const { Provider, Consumer } = createContext<S>(initialState);
@@ -35,7 +42,7 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
           return result.then(mergeAction);
         }
 
-        mergeAction(result);
+        return mergeAction(result);
       };
 
       const action: any = (...args: any[]) => e(...args)();

@@ -37,7 +37,6 @@ it('should initialize the dakpan', () => {
   expect(Consumer).toBeDefined();
   expect(actions).toBeDefined();
   expect(actions.append).toBeDefined();
-  expect(actions.increment).toBeDefined();
 });
 
 it('should throw when an action is dispatched before its provider is mounted', () => {
@@ -154,4 +153,17 @@ it('should pass the actions to the consumer', () => {
   expect(wrapper).toMatchSnapshot();
   wrapper.find('button').simulate('click');
   expect(wrapper.update()).toMatchSnapshot();
+});
+
+it('should return the updated state', async () => {
+  const { Provider, actions } = createMockDakpan();
+
+  mount(
+    <Provider>
+      <div/>
+    </Provider>
+  );
+
+  expect(actions.append('!')).toMatchSnapshot();
+  expect(await actions.increment()).toMatchSnapshot();
 });
