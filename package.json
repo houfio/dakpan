@@ -1,6 +1,6 @@
 {
   "name": "dakpan",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A tiny React state management library using the new React context.",
   "main": "./lib/index.js",
   "umd": "./lib/index.umd.js",
