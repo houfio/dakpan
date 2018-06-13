@@ -100,3 +100,26 @@ An object with the same keys as the input actions with functions that take the a
 append('!'); // executes immediately
 append.e('!'); // executes when called
 ```
+
+#### `withDakpan((state, actions) => object)(component)`
+
+A function which returns a new component with the state and actions from the context (aka a hoc).
+
+```ts
+type Props = {
+  test: string
+};
+
+const Component = withDakpan(({ hello }, { append }) => ({
+  hello,
+  append
+}))<Props>(({ test, hello, append }) => (
+  <>
+    <span>{test}</span>
+    <span>{hello}</span>
+    <button onClick={append.e('!')}/>
+  </>
+));
+
+<Component test="prop"/>
+```
