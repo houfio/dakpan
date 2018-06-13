@@ -168,7 +168,7 @@ it('should return the updated state', async () => {
   expect(await actions.increment()).toMatchSnapshot();
 });
 
-it('passes state data using a hoc', () => {
+it('should pass state data using a hoc', () => {
   const { Provider, withDakpan } = createMockDakpan();
 
   type Test = {

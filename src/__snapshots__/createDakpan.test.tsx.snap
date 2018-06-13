@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`passes state data using a hoc 1`] = `
+exports[`should pass state data using a hoc 1`] = `
 <Component>
   <Component
     test="prop"
