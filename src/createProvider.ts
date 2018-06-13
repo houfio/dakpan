@@ -2,7 +2,7 @@ import {
   Component,
   ComponentClass,
   createElement,
-  Provider,
+  Provider as ReactProvider,
   ProviderProps,
   ReactElement,
   ReactNodeArray,
@@ -13,10 +13,10 @@ import {
 import { DakpanProviderProps, ProviderCallback } from './types';
 
 export const createProvider = <S>(
-  Provider: Provider<S>,
+  ReactProvider: ReactProvider<S>,
   defaultState: S,
   callback: ProviderCallback<S>
-) => class extends Component<DakpanProviderProps, S> {
+) => class Provider extends Component<DakpanProviderProps, S> {
   public constructor(props: DakpanProviderProps) {
     super(props);
 
@@ -31,7 +31,7 @@ export const createProvider = <S>(
   public render() {
     const { children } = this.props;
 
-    return createElement(Provider, {
+    return createElement(ReactProvider, {
       value: this.state,
       children
     });

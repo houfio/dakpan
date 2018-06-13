@@ -8,9 +8,13 @@ export const withDakpan = <S, A extends Actions<S>>(
   map: (state: S, actions: MappedActions<S, A>) => H
 ) => <P>(
   component: ComponentType<P & H>
-) => (props: Omit<P, keyof H>) => createElement(consumer, {
-  children: (state: S, actions: MappedActions<S, A>) => createElement(component, {
-    ...props as any,
-    ...map(state, actions) as any
-  })
-});
+) => {
+  const WithDakpan = (props: Omit<P, keyof H>) => createElement(consumer, {
+    children: (state: S, actions: MappedActions<S, A>) => createElement(component, {
+      ...props as any,
+      ...map(state, actions) as any
+    })
+  });
+
+  return WithDakpan;
+};

@@ -1,10 +1,21 @@
-import { ComponentClass, Consumer, ConsumerProps, createElement, ReactElement, StatelessComponent } from 'react';
+import {
+  ComponentClass,
+  Consumer as ReactConsumer,
+  ConsumerProps,
+  createElement,
+  ReactElement,
+  StatelessComponent
+} from 'react';
 
 import { Actions, DakpanConsumerProps, MappedActions } from './types';
 
 export const createConsumer = <S, A extends Actions<S>>(
-  Consumer: Consumer<S>,
+  ReactConsumer: ReactConsumer<S>,
   actions: MappedActions<S, A>
-) => ({ children }: DakpanConsumerProps<S, A>) => createElement(Consumer, {
-  children: (value: S) => children(value, actions)
-});
+) => {
+  const Consumer = ({ children }: DakpanConsumerProps<S, A>) => createElement(ReactConsumer, {
+    children: (value: S) => children(value, actions)
+  });
+
+  return Consumer;
+};

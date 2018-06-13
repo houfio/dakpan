@@ -1,12 +1,5 @@
 import { ComponentType, ReactNode } from 'react';
 
-export type Dakpan<S, A extends Actions<S>> = {
-  Provider: ComponentType<DakpanProviderProps>,
-  Consumer: ComponentType<DakpanConsumerProps<S, A>>,
-  actions: MappedActions<S, A>,
-  withDakpan: WithDakpan<S, A>
-};
-
 export type DakpanProviderProps = {
   children: ReactNode
 };

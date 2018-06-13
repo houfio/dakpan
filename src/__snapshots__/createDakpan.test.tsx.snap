@@ -1,37 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should pass the actions to the consumer 1`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     <span>
       world
     </span>
     <button
       onClick={[Function]}
     />
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should pass the actions to the consumer 2`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     <span>
       world!
     </span>
     <button
       onClick={[Function]}
     />
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should pass the state to a stateful component using a hoc 1`] = `
-<Component>
-  <Component
+<Provider>
+  <WithDakpan
     test="prop"
   >
-    <Component>
+    <Consumer>
       <Component
         append={[Function]}
         hello="world!"
@@ -44,17 +44,17 @@ exports[`should pass the state to a stateful component using a hoc 1`] = `
           world!
         </span>
       </Component>
-    </Component>
-  </Component>
-</Component>
+    </Consumer>
+  </WithDakpan>
+</Provider>
 `;
 
 exports[`should pass the state to a stateless component using a hoc 1`] = `
-<Component>
-  <Component
+<Provider>
+  <WithDakpan
     test="prop"
   >
-    <Component>
+    <Consumer>
       <Component
         append={[Function]}
         hello="world"
@@ -70,9 +70,9 @@ exports[`should pass the state to a stateless component using a hoc 1`] = `
           onClick={[Function]}
         />
       </Component>
-    </Component>
-  </Component>
-</Component>
+    </Consumer>
+  </WithDakpan>
+</Provider>
 `;
 
 exports[`should return the updated state 1`] = `
@@ -90,59 +90,59 @@ Object {
 `;
 
 exports[`should update the store 1`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     world
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should update the store 2`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     world!
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should update the store as event handler 1`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     <span>
       world
     </span>
     <button
       onClick={[Function]}
     />
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should update the store as event handler 2`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     <span>
       world!
     </span>
     <button
       onClick={[Function]}
     />
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should update the store asynchronously 1`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     0
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;
 
 exports[`should update the store asynchronously 2`] = `
-<Component>
-  <Component>
+<Provider>
+  <Consumer>
     1
-  </Component>
-</Component>
+  </Consumer>
+</Provider>
 `;

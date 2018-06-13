@@ -2,10 +2,10 @@ import { createContext } from 'react';
 
 import { createConsumer } from './createConsumer';
 import { createProvider } from './createProvider';
-import { Actions, Dakpan, DakpanProviderProps, GetState, MappedActions, SetState } from './types';
+import { Actions, DakpanProviderProps, GetState, MappedActions, SetState } from './types';
 import { withDakpan } from './withDakpan';
 
-export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actions: A): Dakpan<S, A> => {
+export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actions: A) => {
   let getState: GetState<S> | undefined;
   let setState: SetState<S, DakpanProviderProps> | undefined;
 
