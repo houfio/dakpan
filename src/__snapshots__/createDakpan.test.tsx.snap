@@ -1,26 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should pass state data using a hoc 1`] = `
-<Component>
-  <Component
-    test="prop"
-  >
-    <Component>
-      <Component
-        hello="world"
-        test="prop"
-      >
-        <span>
-          prop
-           - 
-          world
-        </span>
-      </Component>
-    </Component>
-  </Component>
-</Component>
-`;
-
 exports[`should pass the actions to the consumer 1`] = `
 <Component>
   <Component>
@@ -43,6 +22,55 @@ exports[`should pass the actions to the consumer 2`] = `
     <button
       onClick={[Function]}
     />
+  </Component>
+</Component>
+`;
+
+exports[`should pass the state to a stateful component using a hoc 1`] = `
+<Component>
+  <Component
+    test="prop"
+  >
+    <Component>
+      <Component
+        append={[Function]}
+        hello="world!"
+        test="prop"
+      >
+        <span>
+          prop
+        </span>
+        <span>
+          world!
+        </span>
+      </Component>
+    </Component>
+  </Component>
+</Component>
+`;
+
+exports[`should pass the state to a stateless component using a hoc 1`] = `
+<Component>
+  <Component
+    test="prop"
+  >
+    <Component>
+      <Component
+        append={[Function]}
+        hello="world"
+        test="prop"
+      >
+        <span>
+          prop
+        </span>
+        <span>
+          world
+        </span>
+        <button
+          onClick={[Function]}
+        />
+      </Component>
+    </Component>
   </Component>
 </Component>
 `;

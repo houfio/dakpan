@@ -1,5 +1,6 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
+import { Component } from 'react';
 
 import { createDakpan } from './createDakpan';
 
@@ -100,7 +101,7 @@ it('should update the store as event handler', () => {
 
   expect(wrapper).toMatchSnapshot();
   wrapper.find('button').simulate('click');
-  expect(wrapper.update()).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 });
 
 it('should call an action with the correct parameters', () => {
@@ -152,7 +153,7 @@ it('should pass the actions to the consumer', () => {
 
   expect(wrapper).toMatchSnapshot();
   wrapper.find('button').simulate('click');
-  expect(wrapper.update()).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 });
 
 it('should return the updated state', async () => {
@@ -168,24 +169,67 @@ it('should return the updated state', async () => {
   expect(await actions.increment()).toMatchSnapshot();
 });
 
-it('should pass state data using a hoc', () => {
+it('should pass the state to a stateless component using a hoc', () => {
   const { Provider, withDakpan } = createMockDakpan();
 
   type Test = {
     test: string
   };
 
-  const Component = withDakpan((state) => ({
-    hello: state.hello
-  }))<Test>(({ hello, test }) => (
-    <span>
-      {test} - {hello}
-    </span>
+  const Component = withDakpan(({ hello }, { append }) => ({
+    hello,
+    append
+  }))<Test>(({ test, hello, append }) => (
+    <>
+      <span>{test}</span>
+      <span>{hello}</span>
+      <button onClick={append.e('!')}/>
+    </>
   ));
 
   const wrapper = mount(
     <Provider>
       <Component test="prop"/>
+    </Provider>
+  );
+
+  expect(wrapper).toMatchSnapshot();
+});
+
+it('should pass the state to a stateful component using a hoc', () => {
+  const { Provider, actions, withDakpan } = createMockDakpan();
+
+  type Props = {
+    test: string,
+    hello: string,
+    append: typeof actions.append
+  };
+
+  const TestComponent = withDakpan(({ hello }, { append }) => ({
+    hello,
+    append
+  }))(class extends Component<Props> {
+    public componentDidMount() {
+      const { append } = this.props;
+
+      append('!');
+    }
+
+    public render() {
+      const { test, hello } = this.props;
+
+      return (
+        <>
+          <span>{test}</span>
+          <span>{hello}</span>
+        </>
+      );
+    }
+  });
+
+  const wrapper = mount(
+    <Provider>
+      <TestComponent test="prop"/>
     </Provider>
   );
 

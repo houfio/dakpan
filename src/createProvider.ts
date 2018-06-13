@@ -17,9 +17,10 @@ export const createProvider = <S>(
   defaultState: S,
   callback: ProviderCallback<S>
 ) => class extends Component<DakpanProviderProps, S> {
-  public state = defaultState;
+  public constructor(props: DakpanProviderProps) {
+    super(props);
 
-  public componentDidMount() {
+    this.state = defaultState;
     callback(this.getState, this.setState.bind(this));
   }
 
