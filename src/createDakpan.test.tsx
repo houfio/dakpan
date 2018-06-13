@@ -167,3 +167,27 @@ it('should return the updated state', async () => {
   expect(actions.append('!')).toMatchSnapshot();
   expect(await actions.increment()).toMatchSnapshot();
 });
+
+it('passes state data using a hoc', () => {
+  const { Provider, withDakpan } = createMockDakpan();
+
+  type Test = {
+    test: string
+  };
+
+  const Component = withDakpan((state) => ({
+    hello: state.hello
+  }))<Test>(({ hello, test }) => (
+    <span>
+      {test} - {hello}
+    </span>
+  ));
+
+  const wrapper = mount(
+    <Provider>
+      <Component test="prop"/>
+    </Provider>
+  );
+
+  expect(wrapper).toMatchSnapshot();
+});

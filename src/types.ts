@@ -3,7 +3,8 @@ import { ComponentType, ReactNode } from 'react';
 export type Dakpan<S, A extends Actions<S>> = {
   Provider: ComponentType<DakpanProviderProps>,
   Consumer: ComponentType<DakpanConsumerProps<S, A>>,
-  actions: MappedActions<S, A>
+  actions: MappedActions<S, A>,
+  withDakpan: WithDakpan<S, A>
 };
 
 export type DakpanProviderProps = {
@@ -44,7 +45,6 @@ type MappedAction<XS, XF extends (...args: any[]) => any, XD extends boolean> =
                         () => ActionReturn<XS, XF, XD>
     ) : never;
 
-
 export type ActionReturn<S, F extends (...args: any[]) => any, D extends boolean> =
   ReturnType<ReturnType<F>> extends Promise<Partial<S>> ? D extends true ? () => Promise<void> : Promise<void> : D extends true ? () => void : void;
 // tslint:enable
@@ -57,3 +57,11 @@ export type SetState<S, P> = <K extends keyof S>(
 ) => void;
 
 export type ProviderCallback<S> = (getState?: GetState<S>, setState?: SetState<S, DakpanProviderProps>) => void;
+
+export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+export type WithDakpan<S, A extends Actions<S>> = <H>(
+  map: (state: S, actions: MappedActions<S, A>) => H,
+) => <P>(
+  component: ComponentType<P & H>
+) => ComponentType<Omit<P, keyof H>>;

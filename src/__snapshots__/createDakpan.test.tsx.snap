@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`passes state data using a hoc 1`] = `
+<Component>
+  <Component
+    test="prop"
+  >
+    <Component>
+      <Component
+        hello="world"
+        test="prop"
+      >
+        <span>
+          prop
+           - 
+          world
+        </span>
+      </Component>
+    </Component>
+  </Component>
+</Component>
+`;
+
 exports[`should pass the actions to the consumer 1`] = `
 <Component>
   <Component>

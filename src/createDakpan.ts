@@ -3,6 +3,7 @@ import { createContext } from 'react';
 import { createConsumer } from './createConsumer';
 import { createProvider } from './createProvider';
 import { Actions, Dakpan, DakpanProviderProps, GetState, MappedActions, SetState } from './types';
+import { withDakpan } from './withDakpan';
 
 export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actions: A): Dakpan<S, A> => {
   let getState: GetState<S> | undefined;
@@ -56,12 +57,16 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
     {}
   ) as MappedActions<S, A>;
 
+  const provider = createProvider(Provider, initialState, (get, set) => {
+    getState = get;
+    setState = set;
+  });
+  const consumer = createConsumer(Consumer, mappedActions);
+
   return {
-    Provider: createProvider(Provider, initialState, (get, set) => {
-      getState = get;
-      setState = set;
-    }),
-    Consumer: createConsumer(Consumer, mappedActions),
-    actions: mappedActions
+    Provider: provider,
+    Consumer: consumer,
+    actions: mappedActions,
+    withDakpan: withDakpan(consumer)
   };
 };
