@@ -1,0 +1,17 @@
+{
+  "name": "counter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "dakpan": "^1.2.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "react-scripts": "^1.1.4"
+  }
+}

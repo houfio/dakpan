@@ -36,6 +36,8 @@ const Component = () => (
 );
 ```
 
+For more examples, see [`examples/`](https://github.com/houfio/dakpan/tree/master/examples).
+
 ## Documentation
 
 ## `createDakpan(initialState)(actions)`
