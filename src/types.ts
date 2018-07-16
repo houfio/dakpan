@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode } from 'react';
+import { ComponentType, ReactElement, ReactNode } from 'react';
 
 export type DakpanProviderProps = {
   children: ReactNode
@@ -6,6 +6,11 @@ export type DakpanProviderProps = {
 
 export type DakpanConsumerProps<S, A extends Actions<S>> = {
   children: (state: S, actions: MappedActions<S, A>) => ReactNode
+};
+
+export type DakpanMultiProviderProps = {
+  provide: Array<ComponentType<DakpanProviderProps>>,
+  children: ReactNode
 };
 
 export type Actions<S> = {
@@ -52,9 +57,3 @@ export type SetState<S, P> = <K extends keyof S>(
 export type ProviderCallback<S> = (getState?: GetState<S>, setState?: SetState<S, DakpanProviderProps>) => void;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-
-export type WithDakpan<S, A extends Actions<S>> = <H>(
-  map: (state: S, actions: MappedActions<S, A>) => H,
-) => <P>(
-  component: ComponentType<P & H>
-) => ComponentType<Omit<P, keyof H>>;
