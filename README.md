@@ -125,3 +125,13 @@ const Component = withDakpan(({ hello }, { append }) => ({
 
 <Component test="prop"/>
 ```
+
+## `<DakpanProvider provide/>`
+
+A component that wraps all its children in specified providers.
+
+```ts
+<DakpanProvider provide={[Provider, AnotherProvider]}>
+  <Consumer/>
+<DakpanProvider/>
+```
