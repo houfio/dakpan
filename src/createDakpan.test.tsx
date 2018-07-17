@@ -170,13 +170,13 @@ it('should return the updated state', async () => {
 });
 
 it('should pass the state to a stateless component using a hoc', () => {
-  const { Provider, withDakpan } = createMockDakpan();
+  const { Provider, withConsumer } = createMockDakpan();
 
   type Test = {
     test: string
   };
 
-  const Component = withDakpan(({ hello }, { append }) => ({
+  const Component = withConsumer(({ hello }, { append }) => ({
     hello,
     append
   }))<Test>(({ test, hello, append }) => (
@@ -197,7 +197,7 @@ it('should pass the state to a stateless component using a hoc', () => {
 });
 
 it('should pass the state to a stateful component using a hoc', () => {
-  const { Provider, actions, withDakpan } = createMockDakpan();
+  const { Provider, actions, withConsumer } = createMockDakpan();
 
   type Props = {
     test: string,
@@ -205,7 +205,7 @@ it('should pass the state to a stateful component using a hoc', () => {
     append: typeof actions.append
   };
 
-  const TestComponent = withDakpan(({ hello }, { append }) => ({
+  const TestComponent = withConsumer(({ hello }, { append }) => ({
     hello,
     append
   }))(class extends Component<Props> {

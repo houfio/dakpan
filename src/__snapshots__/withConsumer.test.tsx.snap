@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return the component when no hocs are specified 1`] = `
+<Component>
+  <div />
+</Component>
+`;
+
+exports[`should wrap the component with specified hocs 1`] = `
+<Component
+  provide={
+    Array [
+      [Function],
+      [Function],
+    ]
+  }
+>
+  <Provider>
+    <Provider>
+      <WithConsumer>
+        <Consumer>
+          <WithConsumer
+            hello="world"
+          >
+            <Consumer>
+              <Component
+                hello="world"
+                test={234}
+              >
+                world
+                234
+              </Component>
+            </Consumer>
+          </WithConsumer>
+        </Consumer>
+      </WithConsumer>
+    </Provider>
+  </Provider>
+</Component>
+`;

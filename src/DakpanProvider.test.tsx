@@ -4,7 +4,7 @@ import * as React from 'react';
 import { createDakpan } from './createDakpan';
 import { DakpanProvider } from './DakpanProvider';
 
-it('provides multiple dakpan states', () => {
+it('should provide multiple dakpan states', () => {
   const { Provider: FirstProvider } = createDakpan({
     hello: 'world'
   })({

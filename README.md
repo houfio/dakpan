@@ -42,7 +42,7 @@ For more examples, see [`examples/`](https://github.com/houfio/dakpan/tree/maste
 
 ## `createDakpan(initialState)(actions)`
 
-Returns an object with a provider component, consumer component and actions.
+Returns an object with a provider component, consumer component and a HOC.
 
 ### Input:
 
@@ -82,7 +82,9 @@ A component that should wrap all of the consumers. Without this component mounte
 
 #### `Consumer`
 
-A component that gives its child access to the state. Also passes the actions for ease of use.
+A component that gives its child access to the state and actions.  
+The `actions` object contains functions with the same names as in the `createDakpan` call, but they only take the parameters (and not the state). It returns the state if the action is synchronous, else it wraps in it a promise.  
+Every action also contains a function called `e`, which returns a curried version of itself. That way you can avoid arrow functions in `render`.
 
 ```ts
 <Consumer>
@@ -90,29 +92,16 @@ A component that gives its child access to the state. Also passes the actions fo
 </Consumer>
 ```
 
-#### `actions`
+#### `withConsumer((state, actions) => object)(component)`
 
-An object with the same keys as the input actions with functions that take the action parameters. Returns a promise when the action is asynchronous, otherwise returns void. The function also has the function `e`, which returns another function for use as an event handler.
-
-```ts
-{
-  append: (append: string) => void
-}
-
-append('!'); // executes immediately
-append.e('!'); // executes when called
-```
-
-#### `withDakpan((state, actions) => object)(component)`
-
-A function which returns a new component with the state and actions from the context (aka a hoc).
+A function which returns a new component with the state and actions from the context (aka a HOC).
 
 ```ts
 type Props = {
   test: string
 };
 
-const Component = withDakpan(({ hello }, { append }) => ({
+const Component = withConsumer(({ hello }, { append }) => ({
   hello,
   append
 }))<Props>(({ test, hello, append }) => (
@@ -134,4 +123,14 @@ A component that wraps all its children in specified providers.
 <DakpanProvider provide={[Provider, AnotherProvider]}>
   <Consumer/>
 <DakpanProvider/>
+```
+
+## `withDakpan(...withConsumer())(component)`
+
+A function which wraps the component in specified HOCs.
+
+```ts
+const Component = withDakpan(withFirst(() => ({ first: '' })), withSecond(() => ({ second: '' })))(({ first, second }) => (
+  /** component with access to `first` and `second` */
+))
 ```

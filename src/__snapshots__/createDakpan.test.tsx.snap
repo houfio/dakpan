@@ -28,7 +28,7 @@ exports[`should pass the actions to the consumer 2`] = `
 
 exports[`should pass the state to a stateful component using a hoc 1`] = `
 <Provider>
-  <WithDakpan
+  <WithConsumer
     test="prop"
   >
     <Consumer>
@@ -45,13 +45,13 @@ exports[`should pass the state to a stateful component using a hoc 1`] = `
         </span>
       </Component>
     </Consumer>
-  </WithDakpan>
+  </WithConsumer>
 </Provider>
 `;
 
 exports[`should pass the state to a stateless component using a hoc 1`] = `
 <Provider>
-  <WithDakpan
+  <WithConsumer
     test="prop"
   >
     <Consumer>
@@ -71,7 +71,7 @@ exports[`should pass the state to a stateless component using a hoc 1`] = `
         />
       </Component>
     </Consumer>
-  </WithDakpan>
+  </WithConsumer>
 </Provider>
 `;
 

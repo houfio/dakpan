@@ -13,7 +13,7 @@ import {
 import { createConsumer } from './createConsumer';
 import { createProvider } from './createProvider';
 import { Actions, DakpanProviderProps, GetState, MappedActions, SetState } from './types';
-import { withDakpan } from './withDakpan';
+import { withConsumer } from './withConsumer';
 
 export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actions: A) => {
   let getState: GetState<S> | undefined;
@@ -72,11 +72,14 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
     setState = set;
   });
   const consumer = createConsumer(Consumer, mappedActions);
+  const withDakpan = withConsumer(consumer);
 
   return {
     Provider: provider,
     Consumer: consumer,
+    withConsumer: withDakpan,
+    // todo: remove in 2.0.0
     actions: mappedActions,
-    withDakpan: withDakpan(consumer)
+    withDakpan
   };
 };

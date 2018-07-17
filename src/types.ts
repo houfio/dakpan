@@ -57,3 +57,7 @@ export type SetState<S, P> = <K extends keyof S>(
 export type ProviderCallback<S> = (getState?: GetState<S>, setState?: SetState<S, DakpanProviderProps>) => void;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+export type HOCFunc<H> = <P>(c: ComponentType<H & P>) => ComponentType<P>;
+
+export type HOCProps<W> = W extends HOCFunc<infer H> ? H : never;

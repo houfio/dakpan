@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`provides multiple dakpan states 1`] = `
+exports[`should provide multiple dakpan states 1`] = `
 <Component
   provide={
     Array [
