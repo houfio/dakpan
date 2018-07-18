@@ -115,6 +115,10 @@ const Component = withConsumer(({ hello }, { append }) => ({
 <Component test="prop"/>
 ```
 
+#### `context`
+
+An object with the original `Provider` and `Consumer`.
+
 ## `<DakpanProvider provide/>`
 
 A component that wraps all its children in specified providers.

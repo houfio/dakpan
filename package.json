@@ -49,7 +49,7 @@
     "ts-loader": "^4.4.2",
     "tslint": "^5.11.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.0.0-rc",
+    "typescript": "^2.9.2",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.0.8",
     "webpack-node-externals": "^1.7.2"

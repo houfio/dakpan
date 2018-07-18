@@ -36,7 +36,7 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
     return newState;
   };
 
-  const { Provider, Consumer } = createContext<S>(initialState);
+  const context = createContext<S>(initialState);
   const mappedActions = Object.keys(actions).reduce(
     (result, key) => {
       const e = (...args: any[]) => () => {
@@ -67,17 +67,18 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
     {}
   ) as MappedActions<S, A>;
 
-  const provider = createProvider(Provider, initialState, (get, set) => {
+  const provider = createProvider(context.Provider, initialState, (get, set) => {
     getState = get;
     setState = set;
   });
-  const consumer = createConsumer(Consumer, mappedActions);
+  const consumer = createConsumer(context.Consumer, mappedActions);
   const withDakpan = withConsumer(consumer);
 
   return {
     Provider: provider,
     Consumer: consumer,
     withConsumer: withDakpan,
+    context,
     // todo: remove in 2.0.0
     actions: mappedActions,
     withDakpan
