@@ -2,6 +2,7 @@ import {
   Component,
   ComponentClass,
   ConsumerProps,
+  Context,
   createContext,
   ProviderProps,
   ReactElement,
