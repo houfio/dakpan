@@ -1,41 +1,23 @@
-import {
-  Component,
-  ComponentClass,
-  createElement,
-  Provider as ReactProvider,
-  ProviderProps,
-  ReactElement,
-  ReactNodeArray,
-  ReactPortal,
-  StatelessComponent
-} from 'react';
+import { createElement, StatelessComponent, useEffect, useState } from 'react';
 
-import { DakpanProviderProps, ProviderCallback } from './types';
+import { Actions, DakpanContext, MappedActions, ProviderCallback } from './types';
 
-export const createProvider = <S>(
-  ReactProvider: ReactProvider<S>,
-  defaultState: S,
+export const createProvider = <S, A extends Actions<S>>(
+  context: DakpanContext<S, A>,
+  initialState: S,
+  actions: MappedActions<S, A>,
   callback: ProviderCallback<S>
-) => class Provider extends Component<DakpanProviderProps, S> {
-  public constructor(props: DakpanProviderProps) {
-    super(props);
+): StatelessComponent => ({ children }) => {
+  const [state, setState] = useState(initialState);
 
-    this.state = defaultState;
-    callback(this.getState, this.setState.bind(this));
-  }
+  callback(() => state, setState);
+  useEffect(() => callback, []);
 
-  public componentWillUnmount() {
-    callback();
-  }
-
-  public render() {
-    const { children } = this.props;
-
-    return createElement(ReactProvider, {
-      value: this.state,
-      children
-    });
-  }
-
-  public getState = () => this.state;
+  return createElement(context.Provider, {
+    value: {
+      state,
+      actions
+    },
+    children
+  });
 };

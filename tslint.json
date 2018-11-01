@@ -4,6 +4,7 @@
     "tslint-react"
   ],
   "rules": {
+    "array-type": false,
     "jsx-no-multiline-js": false,
     "indent": [
       true,
