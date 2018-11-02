@@ -7,7 +7,7 @@ it('should work', async () => {
   const [Provider, useDakpan] = createDakpan({
     count: 2
   })({
-    increase: (amount?: number) => ({ count }) => ({
+    increase: (amount?: number) => async ({ count }) => ({
       count: count + (amount || 1)
     })
   });
