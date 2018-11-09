@@ -22,8 +22,8 @@ export type Actions<S> = {
 };
 
 export type MappedActions<S, A extends Actions<S>> = {
-  [K in keyof A]: ((...args: FunctionArguments<A[K]>) => void) & {
-    c: (...args: FunctionArguments<A[K]>) => () => void
+  [K in keyof A]: ((...args: FunctionArguments<A[K]>) => Promise<void>) & {
+    c: (...args: FunctionArguments<A[K]>) => () => Promise<void>
   }
 };
 
