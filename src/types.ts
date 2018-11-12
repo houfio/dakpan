@@ -1,6 +1,6 @@
-import { Context, StatelessComponent } from 'react';
+import { Context, FunctionComponent } from 'react';
 
-export type Dakpan<S, A extends Actions<S>> = [StatelessComponent, DakpanHook<S, A>];
+export type Dakpan<S, A extends Actions<S>> = [FunctionComponent, DakpanHook<S, A>];
 
 export type DakpanContext<S, A extends Actions<S>> = Context<DakpanContextValue<S, A>>;
 
