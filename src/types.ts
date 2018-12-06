@@ -18,7 +18,7 @@ export type GetState<S> = () => S;
 export type SetState<S> = (value: S) => void;
 
 export type Actions<S> = {
-  [action: string]: (...args: any[]) => (state: S) => S | Promise<S>
+  [action: string]: (...args: any[]) => (state: S) => S | undefined | Promise<S | undefined>
 };
 
 export type MappedActions<S, A extends Actions<S>> = {

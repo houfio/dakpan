@@ -25,7 +25,11 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
 
         const state = action(...args)(getState());
 
-        return Promise.resolve(state).then(setState);
+        return Promise.resolve(state).then((state) => {
+          if (state && setState) {
+            setState(state);
+          }
+        });
       };
 
       const action = (...args: unknown[]) => curry(...args)();
