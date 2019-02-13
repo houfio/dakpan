@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "jsx": "react",
     "rootDir": "./src",
-    "outDir": "./lib",
     "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./lib",
+    "skipLibCheck": true,
     "strict": true
   },
   "exclude": [
-    "**/*.test.ts",
     "**/*.test.tsx"
   ]
 }

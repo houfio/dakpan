@@ -1,7 +1,7 @@
 # Dakpan [![npm version](https://badge.fury.io/js/dakpan.svg)](https://www.npmjs.com/package/dakpan)
-A tiny React state management library using the new React context.
+A tiny React state management library using hooks.
 
-## Install
+## Installation
 ```
 npm install dakpan
 ```
@@ -10,11 +10,11 @@ or
 yarn add dakpan
 ```
 
-## Example
-```ts
-import { createDakpan } from 'dakpan';
+## Examples
+There's a working example in the `example/` directory. Here's a smaller one to get your started:
 
-const { Provider, Consumer, actions } = createDakpan({
+```typescript jsx
+const [StateProvider, useDakpan] = createDakpan({
   hello: 'world'
 })({
   append: (append: string) => ({ hello }) => ({
@@ -22,45 +22,37 @@ const { Provider, Consumer, actions } = createDakpan({
   })
 });
 
-const Component = () => (
-  <Provider>
-    <Consumer>
-      {({ hello }) => (
-        <>
-          <span>Hello {hello}</span>
-          <button onClick={actions.append.e('!')}>Add</button>
-        </>
-      )}
-    </Consumer>
-  </Provider>
-);
+// Requires a StateProvider higher up in the tree
+function Component() {
+  const [state, actions] = useDakpan();
+  
+  return (
+    <>
+      <span>Hello {state.hello}</span>
+      <button onClick={actions.append.c('!')}>Add</button>
+    </>
+  )
+}
 ```
-
-For more examples, see [`examples/`](https://github.com/houfio/dakpan/tree/master/examples).
 
 ## Documentation
 
-## `createDakpan(initialState)(actions)`
+### `createDakpan(initialState)(actions)`
+Creates a Dakpan provider and hook.
 
-Returns an object with a provider component, consumer component and a HOC.
-
-### Input:
+### Input
 
 #### `initialState`
-
-The initial state of the provider.
-
-```ts
+Initial state of the provider.
+```typescript
 {
   hello: 'world'
 }
 ```
 
 #### `actions`
-
-An object with actions, of which the first function takes parameters and the second the current state. An action should always return updated state values, or an empty object.
-
-```ts
+Object with actions to register to the Dakpan state. The first function takes all input parameters, and returns another function which receives the current state. The second function should return a new state object, or `undefined` when no state update should happen.
+```typescript
 {
   append: (append: string) => ({ hello }) => ({
     hello: hello + append
@@ -68,73 +60,19 @@ An object with actions, of which the first function takes parameters and the sec
 }
 ```
 
-### Output:
+### Output
+The output of the `createDakpan` function is an array containing the following items:
 
 #### `Provider`
-
-A component that should wrap all of the consumers. Without this component mounted, calling an action throws an error.
-
-```ts
+The context provider. This component should wrap all components using the Dakpan hook.
+```typescript jsx
 <Provider>
   /** children */
 </Provider>
 ```
 
-#### `Consumer`
-
-A component that gives its child access to the state and actions.  
-The `actions` object contains functions with the same names as in the `createDakpan` call, but they only take the parameters (and not the state). It returns the state if the action is synchronous, else it wraps in it a promise.  
-Every action also contains a function called `e`, which returns a curried version of itself. That way you can avoid arrow functions in `render`.
-
-```ts
-<Consumer>
-  {(state, actions) => /** children with access to the state and actions */}
-</Consumer>
-```
-
-#### `withConsumer((state, actions) => object)(component)`
-
-A function which returns a new component with the state and actions from the context (aka a HOC).
-
-```ts
-type Props = {
-  test: string
-};
-
-const Component = withConsumer(({ hello }, { append }) => ({
-  hello,
-  append
-}))<Props>(({ test, hello, append }) => (
-  <>
-    <span>{test}</span>
-    <span>{hello}</span>
-    <button onClick={append.e('!')}/>
-  </>
-));
-
-<Component test="prop"/>
-```
-
-#### `context`
-
-An object with the original `Provider` and `Consumer`.
-
-## `<DakpanProvider provide/>`
-
-A component that wraps all its children in specified providers.
-
-```ts
-<DakpanProvider provide={[Provider, AnotherProvider]}>
-  <Consumer/>
-<DakpanProvider/>
-```
-
-## `withDakpan(...withConsumer())(component)`
-
-A function which wraps the component in specified HOCs.
-
-```ts
-const Component = withDakpan(withFirst(() => ({ first: '' })), withSecond(() => ({ second: '' })))(({ first, second }) => (
-  /** component with access to `first` and `second` */
-))
+#### `useDakpan`
+The hook which provides access to the state and actions of the Dakpan instance. All actions return a `Promise<void>`.
+```typescript
+const [state, actions] = useDakpan();
 ```
