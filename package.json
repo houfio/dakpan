@@ -1,7 +1,7 @@
 {
   "name": "dakpan",
   "version": "2.0.0-alpha.2",
-  "description": "A tiny React state management library using the new React context and hooks.",
+  "description": "A tiny React state management library using hooks.",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
@@ -37,13 +37,13 @@
     "react": "^16.8.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.0",
-    "@types/react": "^16.8.1",
-    "@types/react-test-renderer": "^16.0.3",
+    "@types/jest": "^24.0.3",
+    "@types/react": "^16.8.2",
+    "@types/react-test-renderer": "^16.8.0",
     "jest": "^24.1.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-test-renderer": "^16.8.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-test-renderer": "^16.8.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.1.2",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -53,7 +53,7 @@
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.3.1"
+    "typescript": "^3.3.3"
   },
   "jest": {
     "transform": {

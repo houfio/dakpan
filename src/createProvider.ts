@@ -1,4 +1,4 @@
-import { createElement, FunctionComponent, useEffect, useState } from 'react';
+import { createElement, FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import { Actions, DakpanContext, MappedActions, ProviderCallback } from './types';
 
@@ -10,7 +10,7 @@ export const createProvider = <S, A extends Actions<S>>(
 ): FunctionComponent => ({ children }) => {
   const [state, setState] = useState(initialState);
 
-  callback(() => state, setState);
+  useMemo(() => callback(() => state, setState), []);
   useEffect(() => callback, []);
 
   return createElement(context.Provider, {
