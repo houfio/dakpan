@@ -10,7 +10,7 @@ export const createProvider = <S, A extends Actions<S>>(
 ): FunctionComponent => ({ children }) => {
   const [state, setState] = useState(initialState);
 
-  useMemo(() => callback(() => state, setState), []);
+  callback(() => state, setState);
   useEffect(() => callback, []);
 
   return createElement(context.Provider, {

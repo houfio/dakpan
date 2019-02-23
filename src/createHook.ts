@@ -3,10 +3,14 @@ import { useContext } from 'react';
 import { Actions, DakpanContext, DakpanHook } from './types';
 
 export const createHook = <S, A extends Actions<S>>(context: DakpanContext<S, A>): DakpanHook<S, A> => () => {
-  const { state, actions } = useContext(context);
+  const dakpan = useContext(context);
+
+  if (!dakpan) {
+    throw new Error('Provider not mounted');
+  }
 
   return [
-    state,
-    actions
+    dakpan.state,
+    dakpan.actions
   ];
 };

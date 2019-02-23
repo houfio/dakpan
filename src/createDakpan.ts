@@ -16,24 +16,15 @@ export const createDakpan = <S>(initialState: S) => <A extends Actions<S>>(actio
 
   const mapped = Object.keys(actions).reduce(
     (previous, current) => {
-      const curry = (...args: unknown[]) => () => {
-        const action = actions[current];
-
-        if (!getState || !setState) {
-          throw new Error('You may not dispatch an action without its provider mounted');
-        }
-
-        const state = action(...args)(getState());
-
-        return Promise.resolve(state).then((state) => {
-          if (state && setState) {
-            setState(state);
+      const execute = (...args: unknown[]) => () => Promise.resolve(actions[current](...args)(getState!()))
+        .then((state) => {
+          if (state) {
+            setState!(state);
           }
         });
-      };
 
-      const action = (...args: unknown[]) => curry(...args)();
-      action.c = curry;
+      const action = (...args: unknown[]) => execute(...args)();
+      action.c = execute;
 
       return {
         ...previous,
