@@ -28,3 +28,5 @@ export type MappedActions<S, A extends Actions<S>> = {
 };
 
 export type FunctionArguments<F> = F extends (...args: infer A) => unknown ? A : never;
+
+export type InitialState<S> = S | (() => S);
