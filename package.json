@@ -1,6 +1,6 @@
 {
   "name": "dakpan",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A tiny React state management library using hooks.",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
