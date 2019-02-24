@@ -43,11 +43,16 @@ Creates a Dakpan provider and hook.
 ### Input
 
 #### `initialState`
-Initial state of the provider.
+Initial state of the provider. Either an object or a function returning one.
 ```typescript
 {
   hello: 'world'
 }
+```
+```typescript
+() => ({
+  hello: 'world'
+})
 ```
 
 #### `actions`
