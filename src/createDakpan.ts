@@ -29,8 +29,8 @@ export const createDakpan = <S extends object>(
     (previous, current) => {
       const execute = (...args: unknown[]) => () => Promise.resolve(actions[current](...args)(getState!()))
         .then((state) => {
-          if (state) {
-            setState!(state);
+          if (state && setState) {
+            setState(state);
           }
         });
 

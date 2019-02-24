@@ -12,18 +12,18 @@ export const [TodoProvider, useTodo] = createDakpan<State>({
   visibility: Visibility.All
 })({
   addTodo: (text: string) => ({ todos, ...state }) => ({
+    ...state,
     todos: [
       ...todos,
       {
         text,
         completed: false
       }
-    ],
-    ...state
+    ]
   }),
   toggleTodo: (key: number) => ({ todos, ...state }) => ({
-    todos: todos.map((todo, index) => index === key ? { ...todo, completed: !todo.completed } : todo),
-    ...state
+    ...state,
+    todos: todos.map((todo, index) => index === key ? { ...todo, completed: !todo.completed } : todo)
   }),
   setVisibility: (visibility: Visibility) => (state) => ({
     ...state,
