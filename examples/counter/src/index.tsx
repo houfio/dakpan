@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { Counter } from './containers/Counter';
+import { Counter } from './components/Counter';
 import { CounterProvider } from './states/counter';
 
 render(
