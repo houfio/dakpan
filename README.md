@@ -11,7 +11,7 @@ yarn add dakpan
 ```
 
 ## Examples
-There's a working example in the `example/` directory. Here's a smaller one to get your started:
+You can find the examples in the [`examples/`](https://github.com/houfio/dakpan/tree/master/examples) directory. Here's a smaller one to get your started:
 
 ```typescript jsx
 const [StateProvider, useDakpan] = createDakpan({
