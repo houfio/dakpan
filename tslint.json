@@ -5,6 +5,7 @@
   ],
   "rules": {
     "array-type": false,
+    "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "indent": [
       true,
@@ -15,6 +16,10 @@
     "no-conditional-assignment": false,
     "no-console": false,
     "no-shadowed-variable": false,
+    "object-literal-key-quotes": [
+      true,
+      "as-needed"
+    ],
     "object-literal-sort-keys": false,
     "ordered-imports": [
       true,
@@ -28,10 +33,6 @@
     "trailing-comma": [
       true,
       "never"
-    ],
-    "object-literal-key-quotes": [
-      true,
-      "as-needed"
     ],
     "quotemark": [
       true,
