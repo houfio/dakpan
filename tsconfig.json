@@ -10,8 +10,5 @@
     "declarationDir": "./lib",
     "skipLibCheck": true,
     "strict": true
-  },
-  "exclude": [
-    "**/*.test.tsx"
-  ]
+  }
 }
