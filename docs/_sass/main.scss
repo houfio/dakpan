@@ -1,0 +1,183 @@
+@import "rogue";
+@import "normalize";
+@import "variables";
+@import "mixins";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: $gray;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @each $breakpoint, $width in $breakpoints {
+    @include at-breakpoint($breakpoint) {
+      width: calc(#{if($width == 0, "100%", $width + " - 1rem")} - 2rem)
+    }
+  }
+}
+
+.button {
+  display: inline-block;
+  color: $gray;
+  background-color: white;
+  padding: .75rem 1rem;
+  text-decoration: none;
+  transition: opacity .25s ease;
+
+  &:hover {
+    opacity: .75;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 2rem;
+  color: white;
+  background-color: $gray;
+  height: 100vh;
+
+  &-title {
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  &-subtitle {
+    font-weight: normal;
+    font-size: 1.25rem;
+    margin: 1rem 0;
+  }
+
+  @include at-breakpoint(tablet_portrait) {
+    height: 50vh;
+    align-items: center;
+  }
+}
+
+.navigation {
+  position: sticky;
+  top: 0;
+  background-color: $gray;
+  z-index: 100;
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-items {
+    display: flex;
+  }
+
+  &-brand {
+    display: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    @include at-breakpoint(tablet_landscape) {
+      display: block;
+    }
+  }
+
+  &-brand, &-item {
+    color: white;
+    padding: 1.5rem;
+    text-decoration: none;
+
+    &.active {
+      padding-bottom: 1.25rem;
+      border-bottom: .25rem solid white;
+    }
+
+    &:first-child {
+      margin-left: -1.5rem;
+    }
+
+    &:last-child {
+      margin-right: -1.5rem;
+    }
+  }
+}
+
+.main {
+  margin: 5rem 0;
+
+  a {
+    color: $gray;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity .25s ease;
+
+    &:hover {
+      opacity: .75;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: $gray;
+  }
+
+  .highlight {
+    margin-bottom: 1rem;
+
+    pre {
+      font-family: monospace;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      word-wrap: normal;
+      background-color: whitesmoke;
+      overflow: auto;
+    }
+  }
+
+  blockquote {
+    padding: 0 1rem;
+    margin-left: 0;
+    border-left: .25rem solid $gray;
+    opacity: .75;
+  }
+
+  table {
+    display: block;
+    overflow: auto;
+    word-break: keep-all;
+    border-collapse: collapse;
+
+    th, td {
+      padding: .75rem 1rem;
+    }
+
+    th {
+      font-weight: bold;
+      color: white;
+      background-color: $gray;
+    }
+
+    td {
+      background-color: whitesmoke;
+    }
+  }
+
+  hr {
+    height: .25rem;
+    background-color: $gray;
+    border: none;
+    margin: 2rem 0;
+  }
+}

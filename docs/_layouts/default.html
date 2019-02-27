@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="{{ site.lang | default: "en_US" }}">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#24292e"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% seo %}
+  </head>
+  <body>
+    {% if page.url == '/' %}
+      <header class="header">
+        <h1 class="header-title">{{ site.title | default: site.github.repository_name }}</h1>
+        <h2 class="header-subtitle">{{ site.description | default: site.github.project_tagline }}</h2>
+        <a href="{{ site.github.repository_url }}" class="button">View on GitHub</a>
+      </header>
+    {% endif %}
+    <nav class="navigation">
+      <div class="container">
+        <div class="navigation-inner">
+          <a class="navigation-brand" href="/">Dakpan</a>
+          <div class="navigation-items">
+            <a class="navigation-item{% if page.url == '/' %} active{% endif %}" href="/">Installation</a>
+            <a class="navigation-item{% if page.url == '/usage.html' %} active{% endif %}" href="/usage.html">Usage</a>
+            <a class="navigation-item{% if page.url == '/examples.html' %} active{% endif %}" href="/examples.html">Examples</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="main">
+      <div class="container">
+        {{ content }}
+      </div>
+    </main>
+  </body>
+</html>
