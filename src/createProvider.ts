@@ -17,7 +17,6 @@ export const createProvider = <S, A extends Actions<S>>(
     value: {
       state,
       actions
-    },
-    children
-  });
+    }
+  }, children);
 };

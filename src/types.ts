@@ -22,11 +22,9 @@ export type Actions<S> = {
 };
 
 export type MappedActions<S, A extends Actions<S>> = {
-  [K in keyof A]: ((...args: FunctionArguments<A[K]>) => Promise<void>) & {
-    c: (...args: FunctionArguments<A[K]>) => () => Promise<void>
+  [K in keyof A]: ((...args: Parameters<A[K]>) => Promise<void>) & {
+    c: (...args: Parameters<A[K]>) => () => Promise<void>
   }
 };
-
-export type FunctionArguments<F> = F extends (...args: infer A) => unknown ? A : never;
 
 export type InitialState<S> = S | (() => S);
