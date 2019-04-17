@@ -1,4 +1,4 @@
-import { ComponentType, createElement, ReactElement } from 'react';
+import { ComponentType, createElement } from 'react';
 
 import { Actions, DakpanConsumerProps, MappedActions, Omit } from './types';
 

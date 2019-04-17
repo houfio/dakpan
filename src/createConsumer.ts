@@ -1,11 +1,4 @@
-import {
-  ComponentClass,
-  Consumer as ReactConsumer,
-  ConsumerProps,
-  createElement,
-  ReactElement,
-  StatelessComponent
-} from 'react';
+import { Consumer as ReactConsumer, createElement } from 'react';
 
 import { Actions, DakpanConsumerProps, MappedActions } from './types';
 

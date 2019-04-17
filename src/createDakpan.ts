@@ -1,15 +1,4 @@
-import {
-  Component,
-  ComponentClass,
-  ConsumerProps,
-  Context,
-  createContext,
-  ProviderProps,
-  ReactElement,
-  ReactNodeArray,
-  ReactPortal,
-  StatelessComponent
-} from 'react';
+import { createContext } from 'react';
 
 import { createConsumer } from './createConsumer';
 import { createProvider } from './createProvider';

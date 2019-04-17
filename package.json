@@ -1,15 +1,17 @@
 {
   "name": "dakpan",
   "version": "1.3.1",
-  "description": "A tiny React state management library using the new React context.",
+  "description": "A tiny React state management library using React context.",
   "main": "./lib/index.js",
+  "module": "./lib/index.es.js",
   "umd": "./lib/index.umd.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "prebuild": "npm run lint && npm run test",
-    "build": "rimraf lib/ && tsc --declaration && webpack",
-    "test": "jest",
+    "prebuild": "npm run lint && npm run test && npm run clean",
+    "build": "rollup -c",
+    "test": "echo no",
     "lint": "tslint \"src/**/*.ts?(x)\"",
+    "clean": "rimraf lib/",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -35,39 +37,17 @@
     "react": "^16.3.0"
   },
   "devDependencies": {
-    "@types/enzyme": "^3.1.12",
-    "@types/jest": "^23.3.0",
-    "@types/react": "^16.4.6",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.4",
-    "jest": "^23.4.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.0.1",
-    "ts-loader": "^4.4.2",
-    "tslint": "^5.11.0",
-    "tslint-react": "^3.6.0",
-    "typescript": "^2.9.2",
-    "webpack": "^4.16.1",
-    "webpack-cli": "^3.0.8",
-    "webpack-node-externals": "^1.7.2"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "\\.test\\.[tj]sx?$",
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/setupTests.js",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
+    "@types/react": "16.3.18",
+    "react": "16.3.2",
+    "react-dom": "16.3.3",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.10.0",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "tslint": "^5.16.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.4.3"
   }
 }

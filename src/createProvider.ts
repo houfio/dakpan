@@ -1,14 +1,4 @@
-import {
-  Component,
-  ComponentClass,
-  createElement,
-  Provider as ReactProvider,
-  ProviderProps,
-  ReactElement,
-  ReactNodeArray,
-  ReactPortal,
-  StatelessComponent
-} from 'react';
+import { Component, createElement, Provider as ReactProvider } from 'react';
 
 import { DakpanProviderProps, ProviderCallback } from './types';
 

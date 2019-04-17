@@ -1,4 +1,4 @@
-import { ComponentType, ReactElement, ReactNode } from 'react';
+import { ComponentType, ReactNode } from 'react';
 
 export type DakpanProviderProps = {
   children: ReactNode
