@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should pass the actions to the consumer 1`] = `
+<DocumentFragment>
+  <span>
+    world
+  </span>
+  <button
+    data-testid="button"
+  />
+</DocumentFragment>
+`;
+
+exports[`should pass the actions to the consumer 2`] = `
+<DocumentFragment>
+  <span>
+    world!
+  </span>
+  <button
+    data-testid="button"
+  />
+</DocumentFragment>
+`;
+
+exports[`should pass the state to a stateful component using a hoc 1`] = `
+<DocumentFragment>
+  <span>
+    prop
+  </span>
+  <span>
+    world!
+  </span>
+</DocumentFragment>
+`;
+
+exports[`should pass the state to a stateless component using a hoc 1`] = `
+<DocumentFragment>
+  <span>
+    prop
+  </span>
+  <span>
+    world
+  </span>
+  <button />
+</DocumentFragment>
+`;
+
+exports[`should return the updated state 1`] = `
+Object {
+  "hello": "world!",
+  "test": 0,
+}
+`;
+
+exports[`should return the updated state 2`] = `
+Object {
+  "hello": "world!",
+  "test": 1,
+}
+`;
+
+exports[`should update the store 1`] = `
+<DocumentFragment>
+  world
+</DocumentFragment>
+`;
+
+exports[`should update the store 2`] = `
+<DocumentFragment>
+  world!
+</DocumentFragment>
+`;
+
+exports[`should update the store as event handler 1`] = `
+<DocumentFragment>
+  <span>
+    world
+  </span>
+  <button
+    data-testid="button"
+  />
+</DocumentFragment>
+`;
+
+exports[`should update the store as event handler 2`] = `
+<DocumentFragment>
+  <span>
+    world!
+  </span>
+  <button
+    data-testid="button"
+  />
+</DocumentFragment>
+`;
+
+exports[`should update the store asynchronously 1`] = `
+<DocumentFragment>
+  0
+</DocumentFragment>
+`;
+
+exports[`should update the store asynchronously 2`] = `
+<DocumentFragment>
+  1
+</DocumentFragment>
+`;

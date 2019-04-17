@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return the component when no hocs are specified 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`should wrap the component with specified hocs 1`] = `
+<DocumentFragment>
+  world234
+</DocumentFragment>
+`;

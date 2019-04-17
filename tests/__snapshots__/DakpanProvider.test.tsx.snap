@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should provide multiple dakpan states 1`] = `
+<DocumentFragment>
+  <span>
+    1
+  </span>
+</DocumentFragment>
+`;
