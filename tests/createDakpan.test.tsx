@@ -1,5 +1,5 @@
+import { fireEvent, render, waitForDomChange } from '@testing-library/react';
 import * as React from 'react';
-import { fireEvent, render, waitForDomChange } from 'react-testing-library';
 
 import { createDakpan } from '../src/createDakpan';
 
