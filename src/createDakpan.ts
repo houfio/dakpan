@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 
+import { createHoc } from './createHoc';
 import { createHook } from './createHook';
 import { createProvider } from './createProvider';
 import { Actions, Dakpan, GetState, InitialState, MappedActions, ProviderCallback, SetState } from './types';
@@ -35,9 +36,11 @@ export const createDakpan = <S extends object>(
     },
     {}
   ) as MappedActions<S, A>;
+  const hook = createHook(context, mapped);
 
   return [
     createProvider(context, initialState, callback),
-    createHook(context, mapped)
+    hook,
+    createHoc(hook)
   ];
 };

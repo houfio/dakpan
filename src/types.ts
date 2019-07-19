@@ -1,8 +1,14 @@
-import { FunctionComponent } from 'react';
+import { ComponentType, FunctionComponent } from 'react';
 
-export type Dakpan<S, A extends Actions<S>> = [FunctionComponent, DakpanHook<S, A>];
+export type Dakpan<S, A extends Actions<S>> = [FunctionComponent, DakpanHook<S, A>, DakpanHoc<S, A>];
 
 export type DakpanHook<S, A extends Actions<S>> = () => [S, MappedActions<S, A>];
+
+export type DakpanHoc<S, A extends Actions<S>> = <H>(
+  map: (state: S, actions: MappedActions<S, A>) => H
+) => <P>(
+  component: ComponentType<P & H>
+) => ComponentType<P>;
 
 export type ProviderCallback<S> = (get?: GetState<S>, set?: SetState<S>) => void;
 

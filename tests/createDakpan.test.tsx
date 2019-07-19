@@ -7,7 +7,7 @@ const initialState = {
   count: 1
 };
 
-const [CountProvider, useCount] = createDakpan(initialState)({
+const [CountProvider, useCount, withCount] = createDakpan(initialState)({
   increase: () => ({ count }) => ({
     count: count + 1
   })
@@ -25,6 +25,22 @@ function App() {
   return (
     <CountProvider>
       <Counter/>
+    </CountProvider>
+  );
+}
+
+type Props = {
+  test: string
+};
+
+const HocCounter = withCount(({ count }, { increase }) => ({ count, increase }))<Props>(({ count, increase, test }) => (
+  <button data-testid="button" onClick={increase}>{count} {test}</button>
+));
+
+function HocApp() {
+  return (
+    <CountProvider>
+      <HocCounter test="test"/>
     </CountProvider>
   );
 }
@@ -57,4 +73,22 @@ it('should update the state', async () => {
   await waitForDomChange();
 
   expect(button.textContent).toEqual('2');
+});
+
+it('should provide the initial state with the hoc', () => {
+  const { getByTestId } = render(<HocCounter test="test"/>);
+  const button = getByTestId('button');
+
+  expect(button.textContent).toEqual('1 test');
+});
+
+it('should update the state with the hoc', async () => {
+  const { getByTestId } = render(<HocApp/>);
+  const button = getByTestId('button');
+
+  fireEvent.click(button);
+
+  await waitForDomChange();
+
+  expect(button.textContent).toEqual('2 test');
 });
