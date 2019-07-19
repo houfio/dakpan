@@ -10,11 +10,10 @@ export type DakpanHoc<S, A extends Actions<S>> = <H>(
   component: ComponentType<P & H>
 ) => ComponentType<P>;
 
-export type ProviderCallback<S> = (get?: GetState<S>, set?: SetState<S>) => void;
-
-export type GetState<S> = () => S;
-
-export type SetState<S> = (value: S) => void;
+export type DakpanContext<S, A extends Actions<S>> = {
+  state: S,
+  actions: MappedActions<S, A>
+};
 
 export type Actions<S> = {
   [action: string]: (...args: any[]) => (state: S) => S | undefined | Promise<S | undefined>

@@ -57,11 +57,9 @@ it('should provide the initial state', () => {
   expect(button.textContent).toEqual('1');
 });
 
-it('should provide the initial state when the provider is unmounted', () => {
-  const { getByTestId } = render(<Counter/>);
-  const button = getByTestId('button');
-
-  expect(button.textContent).toEqual('1');
+it('should throw when the provider is unmounted', () => {
+  expect(() => render(<Counter/>)).toThrow('Provider not mounted');
+  expect(() => render(<HocCounter test="test"/>)).toThrow('Provider not mounted');
 });
 
 it('should update the state', async () => {
@@ -73,13 +71,6 @@ it('should update the state', async () => {
   await waitForDomChange();
 
   expect(button.textContent).toEqual('2');
-});
-
-it('should provide the initial state with the hoc', () => {
-  const { getByTestId } = render(<HocCounter test="test"/>);
-  const button = getByTestId('button');
-
-  expect(button.textContent).toEqual('1 test');
 });
 
 it('should update the state with the hoc', async () => {

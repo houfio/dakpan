@@ -1,18 +1,37 @@
-import { Context, createElement, FunctionComponent, useEffect, useState } from 'react';
+import { Context, createElement, FunctionComponent, useMemo, useState } from 'react';
 
-import { Actions, InitialState, ProviderCallback } from './types';
+import { Actions, DakpanContext, InitialState, MappedActions } from './types';
 
 export const createProvider = <S, A extends Actions<S>>(
-  context: Context<S>,
-  initialState: InitialState<S>,
-  callback: ProviderCallback<S>
+  context: Context<DakpanContext<S, A>>,
+  actions: A,
+  initialState: InitialState<S>
 ): FunctionComponent => ({ children }) => {
-  const [value, setValue] = useState(initialState);
+  const [state, setState] = useState(initialState);
+  const mapped = useMemo(() => Object.keys(actions).reduce(
+    (previous, current) => {
+      const execute = (...args: unknown[]) => () => Promise.resolve(actions[current](...args)(state))
+        .then((next) => {
+          if (next) {
+            setState(next);
+          }
+        });
 
-  callback(() => value, setValue);
-  useEffect(() => callback, []);
+      const action = (...args: unknown[]) => execute(...args)();
+      action.c = execute;
+
+      return {
+        ...previous,
+        [current]: action
+      };
+    },
+    {}
+  ) as MappedActions<S, A>, [actions]);
 
   return createElement(context.Provider, {
-    value
+    value: {
+      state,
+      actions: mapped
+    }
   }, children);
 };
