@@ -32,7 +32,7 @@
   "bugs": {
     "url": "https://github.com/houfio/dakpan/issues"
   },
-  "homepage": "https://github.com/houfio/dakpan#readme",
+  "homepage": "https://dakpan.houf.io/",
   "peerDependencies": {
     "react": "^16.8.0"
   },
