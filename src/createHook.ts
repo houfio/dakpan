@@ -1,16 +1,15 @@
-import { useContext } from 'react';
+import { Context, useContext } from 'react';
 
-import { Actions, DakpanContext, DakpanHook } from './types';
+import { Actions, DakpanHook, MappedActions } from './types';
 
-export const createHook = <S, A extends Actions<S>>(context: DakpanContext<S, A>): DakpanHook<S, A> => () => {
-  const dakpan = useContext(context);
-
-  if (!dakpan) {
-    throw new Error('Provider not mounted');
-  }
+export const createHook = <S, A extends Actions<S>>(
+  context: Context<S>,
+  actions: MappedActions<S, A>
+): DakpanHook<S, A> => () => {
+  const state = useContext(context);
 
   return [
-    dakpan.state,
-    dakpan.actions
+    state,
+    actions
   ];
 };

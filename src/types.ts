@@ -1,13 +1,6 @@
-import { Context, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 export type Dakpan<S, A extends Actions<S>> = [FunctionComponent, DakpanHook<S, A>];
-
-export type DakpanContext<S, A extends Actions<S>> = Context<DakpanContextValue<S, A>>;
-
-export type DakpanContextValue<S, A extends Actions<S>> = {
-  state: S,
-  actions: MappedActions<S, A>
-};
 
 export type DakpanHook<S, A extends Actions<S>> = () => [S, MappedActions<S, A>];
 

@@ -1,22 +1,18 @@
-import { createElement, FunctionComponent, useEffect, useState } from 'react';
+import { Context, createElement, FunctionComponent, useEffect, useState } from 'react';
 
-import { Actions, DakpanContext, InitialState, MappedActions, ProviderCallback } from './types';
+import { Actions, InitialState, ProviderCallback } from './types';
 
 export const createProvider = <S, A extends Actions<S>>(
-  context: DakpanContext<S, A>,
+  context: Context<S>,
   initialState: InitialState<S>,
-  actions: MappedActions<S, A>,
   callback: ProviderCallback<S>
 ): FunctionComponent => ({ children }) => {
-  const [state, setState] = useState(initialState);
+  const [value, setValue] = useState(initialState);
 
-  callback(() => state, setState);
+  callback(() => value, setValue);
   useEffect(() => callback, []);
 
   return createElement(context.Provider, {
-    value: {
-      state,
-      actions
-    }
+    value
   }, children);
 };

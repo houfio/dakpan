@@ -2,21 +2,12 @@ import { createContext } from 'react';
 
 import { createHook } from './createHook';
 import { createProvider } from './createProvider';
-import {
-  Actions,
-  Dakpan,
-  DakpanContextValue,
-  GetState,
-  InitialState,
-  MappedActions,
-  ProviderCallback,
-  SetState
-} from './types';
+import { Actions, Dakpan, GetState, InitialState, MappedActions, ProviderCallback, SetState } from './types';
 
 export const createDakpan = <S extends object>(
   initialState: InitialState<S>
 ) => <A extends Actions<S>>(actions: A): Dakpan<S, A> => {
-  const context = createContext<DakpanContextValue<S, A>>(undefined!);
+  const context = createContext<S>(typeof initialState === 'object' ? initialState : initialState());
   let getState: GetState<S> | undefined;
   let setState: SetState<S> | undefined;
 
@@ -46,7 +37,7 @@ export const createDakpan = <S extends object>(
   ) as MappedActions<S, A>;
 
   return [
-    createProvider(context, initialState, mapped, callback),
-    createHook(context)
+    createProvider(context, initialState, callback),
+    createHook(context, mapped)
   ];
 };

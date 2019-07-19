@@ -3,9 +3,11 @@ import * as React from 'react';
 
 import { createDakpan } from '../src/createDakpan';
 
-const [CountProvider, useCount] = createDakpan({
+const initialState = {
   count: 1
-})({
+};
+
+const [CountProvider, useCount] = createDakpan(initialState)({
   increase: () => ({ count }) => ({
     count: count + 1
   })
@@ -32,12 +34,15 @@ it('should return an array with a provider and hook', () => {
   expect(useCount).toBeDefined();
 });
 
-it('should throw when the provider isn\'t mounted', () => {
-  expect(() => render(<Counter/>)).toThrow('Provider not mounted');
-});
-
 it('should provide the initial state', () => {
   const { getByTestId } = render(<App/>);
+  const button = getByTestId('button');
+
+  expect(button.textContent).toEqual('1');
+});
+
+it('should provide the initial state when the provider is unmounted', () => {
+  const { getByTestId } = render(<Counter/>);
   const button = getByTestId('button');
 
   expect(button.textContent).toEqual('1');
