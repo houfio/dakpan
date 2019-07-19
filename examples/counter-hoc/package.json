@@ -1,0 +1,32 @@
+{
+  "name": "counter-hoc",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "dakpan": "^2.1.0-alpha.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "react-scripts": "^3.0.1",
+    "typescript": "^3.5.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
