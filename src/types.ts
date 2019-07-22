@@ -10,7 +10,7 @@ export type DakpanHoc<S, A extends Actions<S>> = <H>(
   component: ComponentType<P & H>
 ) => ComponentType<P>;
 
-export type DakpanContext<S, A extends Actions<S>> = {
+export type DakpanContext<S, A extends Actions<S>> = undefined | {
   state: S,
   actions: MappedActions<S, A>
 };

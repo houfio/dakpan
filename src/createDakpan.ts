@@ -8,7 +8,7 @@ import { Actions, Dakpan, DakpanContext, InitialState } from './types';
 export const createDakpan = <S extends object>(
   initialState: InitialState<S>
 ) => <A extends Actions<S>>(actions: A): Dakpan<S, A> => {
-  const context = createContext<DakpanContext<S, A>>(undefined!);
+  const context = createContext<DakpanContext<S, A>>(undefined);
   const hook = createHook(context);
 
   return [
