@@ -26,7 +26,7 @@ export const createProvider = <S, A extends Actions<S>>(
       };
     },
     {}
-  ) as MappedActions<S, A>, [actions]);
+  ) as MappedActions<S, A>, [actions, state]);
 
   return createElement(context.Provider, {
     value: {
