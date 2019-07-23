@@ -14,7 +14,7 @@ export const createHoc = <S, A extends Actions<S>>(
     });
   };
 
-  hoc.displayName = `WithDakpan(${component.displayName || component.name || 'Unknown'})`;
+  hoc.displayName = `WithDakpan(${component.displayName || component.name || 'Component'})`;
 
   return hoc;
 };
