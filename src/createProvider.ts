@@ -7,8 +7,8 @@ export function createProvider<S, A extends Actions<S>>(
   actions: A,
   initialState?: InitialState<S>
 ): FunctionComponent<any> {
-  return ({ children, value = initialState }) => {
-    const [state, setState] = useState(value!);
+  return ({ children, value }) => {
+    const [state, setState] = useState(initialState || value);
     const mapped = useMemo(() => Object.keys(actions).reduce(
       (previous, current) => {
         const execute = (...args: unknown[]) => () => Promise.resolve(actions[current](...args)(state))

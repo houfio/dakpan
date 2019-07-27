@@ -19,9 +19,9 @@ export type DakpanContext<S, A extends Actions<S>> = undefined | {
   actions: MappedActions<S, A>
 };
 
-export type ProviderProps<S, I extends boolean> = I extends false ? {
+export type ProviderProps<S, I extends boolean> = I extends true ? {} : {
   value: S
-} : {};
+};
 
 export type Actions<S> = {
   [action: string]: (...args: any[]) => (state: S) => S | undefined | Promise<S | undefined>
