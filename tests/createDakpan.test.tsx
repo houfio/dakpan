@@ -1,4 +1,5 @@
 import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import { useCallback } from 'react';
 import * as React from 'react';
 
 import { createDakpan } from '../src/createDakpan';
@@ -15,9 +16,15 @@ const [CountProvider, useCount, withCount] = createDakpan(initialState)({
 
 function Counter() {
   const [countState, countActions] = useCount();
+  const doubleIncrease = useCallback(() => {
+    countActions.increase().then(countActions.increase);
+  }, [countActions]);
 
   return (
-    <button data-testid="button" onClick={countActions.increase}>{countState.count}</button>
+    <>
+      <button data-testid="button" onClick={countActions.increase}>{countState.count}</button>
+      <button data-testid="button-two" onClick={doubleIncrease}>{countState.count}</button>
+    </>
   );
 }
 
@@ -82,4 +89,15 @@ it('should update the state with the hoc', async () => {
   await waitForDomChange();
 
   expect(button.textContent).toEqual('2 test');
+});
+
+it('should update the multiple times in a single render', async () => {
+  const { getByTestId } = render(<App/>);
+  const button = getByTestId('button-two');
+
+  fireEvent.click(button);
+
+  await waitForDomChange();
+
+  expect(button.textContent).toEqual('3');
 });

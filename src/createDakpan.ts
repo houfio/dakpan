@@ -15,9 +15,10 @@ export function createDakpan<S extends object>(initialState?: InitialState<S>) {
   return <A extends Actions<S>>(actions: A): Dakpan<S, A, true | false> => {
     const context = createContext<DakpanContext<S, A>>(undefined);
     const hook = createHook(context);
+    const state = initialState instanceof Function ? initialState() : initialState;
 
     return [
-      createProvider(context, actions, initialState),
+      createProvider(context, actions, state),
       hook,
       createHoc(hook)
     ];
