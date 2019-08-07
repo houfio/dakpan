@@ -6,7 +6,9 @@ export type Dakpan<S, A extends Actions<S>, I extends boolean> = [
   DakpanHoc<S, A>
 ];
 
-export type DakpanHook<S, A extends Actions<S>> = () => [S, MappedActions<S, A>];
+export type DakpanHook<S, A extends Actions<S>> = <T extends boolean = false>(nullable?: T) => T extends false
+  ? [S, MappedActions<S, A>]
+  : [S | undefined, MappedActions<S, A> | undefined];
 
 export type DakpanHoc<S, A extends Actions<S>> = <H>(
   map: (state: S, actions: MappedActions<S, A>) => H
