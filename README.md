@@ -1,7 +1,7 @@
 # Dakpan 
-[![npm version](https://badge.fury.io/js/dakpan.svg)](https://www.npmjs.com/package/dakpan)
-[![gzip size](http://img.badgesize.io/https://unpkg.com/dakpan@latest/lib/index.es.js?compression=gzip)](https://unpkg.com/dakpan@latest/lib/index.es.js)
-[![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE.md)
+[![npm](https://badgen.net/npm/v/dakpan)](https://www.npmjs.com/package/dakpan)
+[![minzipped size](https://badgen.net/bundlephobia/minzip/dakpan)](https://www.npmjs.com/package/dakpan)
+[![license](https://badgen.net/npm/license/dakpan)](./LICENSE.md)
 
 A tiny React state management library using hooks.
 
