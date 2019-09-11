@@ -5,6 +5,16 @@
 
 A tiny React state management library using hooks.
 
+```tsx
+const [StateProvider, useDakpan, withDakpan] = createDakpan({
+  hello: 'world'
+})({
+  append: (value: string) => ({ hello }) => ({
+    hello: hello + value
+  })
+});
+```
+
 ## Installation
 
 ```
