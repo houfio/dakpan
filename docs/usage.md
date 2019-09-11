@@ -8,13 +8,13 @@ The entire api Dakpan exposes to the developer is just one function. Here you ca
 
 ---
 
-### `createDakpan(initialState)(actions)`
+### `createDakpan(initialState?)(actions)`
 > Creates a Dakpan provider and hook.
 
 ### Input
 
 #### `initialState`
-> Initial state of the provider. Either an object or a function returning one.
+> Initial state of the provider. Either an object or a function returning one. When `undefined`, you have to supply the provider with an initial state.
 
 ```tsx
 {
@@ -41,8 +41,8 @@ The entire api Dakpan exposes to the developer is just one function. Here you ca
 ### Output
 > The output of the `createDakpan` function is an array containing the following items:
 
-#### `Provider`
-> The context provider. This component should wrap all components using the Dakpan hook.
+#### `<Provider value?: object/>`
+> The context provider. This component should wrap all components using the Dakpan hook. You can use the same provider multiple times in the same tree. Ony asks for a value when no initial value is given to `createDakpan`.
 
 ```tsx
 <Provider>
@@ -50,9 +50,20 @@ The entire api Dakpan exposes to the developer is just one function. Here you ca
 </Provider>
 ```
 
-#### `useDakpan`
-> The hook which provides access to the state and actions of the Dakpan instance. All actions return a `Promise<void>`.
+#### `useDakpan(nullable?: boolean)`
+> The hook which provides access to the state and actions of the Dakpan instance. All actions return a `Promise<void>`. The `nullable` parameter is optional, and if true indicates that the hook should NOT throw when it can't find a provider higher up in the tree.
 
 ```tsx
 const [state, actions] = useDakpan();
+```
+
+#### `withDakpan(map: (state, actions) => object)(Component)`
+> HOC which supplies your component with the Dakpan state and actions. The return value of the first parameter gets injected into the component.
+
+```tsx
+const WithState = withDakpan((state) => ({ test: state.test }))(({ test }) => (
+  <div>
+    {test}
+  </div>
+));
 ```

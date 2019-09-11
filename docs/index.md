@@ -4,7 +4,7 @@ layout: default
 
 # Installation
 
-Dakpan is a library designed to make global state management easier than ever. It provides an easy and completely type-safe api for a great developer experience, and this all at under 1KB.
+Dakpan is a library designed to make global and local state management easier than ever. It provides an easy and completely type-safe api for a great developer experience, and this all at under 1KB.
 
 ---
 
