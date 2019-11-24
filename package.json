@@ -37,27 +37,24 @@
     "react": "^16.8.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^9.1.4",
-    "@types/jest": "^24.0.18",
-    "@types/react": "^16.9.2",
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.23",
+    "@types/react": "^16.9.13",
     "jest": "^24.9.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "rimraf": "^3.0.0",
-    "rollup": "^1.21.2",
+    "rollup": "^1.27.4",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-filesize": "^6.2.0",
+    "rollup-plugin-filesize": "^6.2.1",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.24.1",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.20.0",
-    "tslint-react": "^4.0.0",
-    "typescript": "^3.6.3"
+    "rollup-plugin-typescript2": "^0.25.2",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.7.2"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "@testing-library/react/cleanup-after-each.js"
-    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
