@@ -22,7 +22,8 @@ export type DakpanContext<S, A extends Actions<S>> = undefined | {
 };
 
 export type ProviderProps<S, I extends boolean> = I extends true ? {} : {
-  value: S
+  value: S,
+  reinitialize?: boolean
 };
 
 export type Actions<S> = {

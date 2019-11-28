@@ -1,4 +1,4 @@
-import { Context, createElement, FunctionComponent, useMemo, useRef, useState } from 'react';
+import { Context, createElement, FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Actions, DakpanContext, MappedActions } from './types';
 
@@ -7,8 +7,9 @@ export function createProvider<S, A extends Actions<S>>(
   actions: A,
   state?: S
 ): FunctionComponent<any> {
-  return ({ children, value }) => {
+  return ({ children, value, reinitialize = false }) => {
     const [, update] = useState({});
+    const initialRef = useRef(value);
     const stateRef = useRef(state || value);
     const mapped = useMemo(() => Object.keys(actions).reduce(
       (previous, current) => {
@@ -30,6 +31,13 @@ export function createProvider<S, A extends Actions<S>>(
       },
       {}
     ) as MappedActions<S, A>, [actions, stateRef]);
+
+    useEffect(() => {
+      if (reinitialize && value !== initialRef.current) {
+        stateRef.current = initialRef.current = value;
+        update({});
+      }
+    }, [value, reinitialize, initialRef]);
 
     return createElement(context.Provider, {
       value: {
