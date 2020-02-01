@@ -27,7 +27,7 @@ export type ProviderProps<S, I extends boolean> = I extends true ? {} : {
 };
 
 export type Actions<S> = {
-  [action: string]: (...args: any[]) => (state: S) => S | undefined | Promise<S | undefined>
+  [action: string]: (...args: any[]) => (state: S, get: () => S) => S | undefined | Promise<S | undefined>
 };
 
 export type MappedActions<S, A extends Actions<S>> = {

@@ -13,13 +13,14 @@ export function createProvider<S, A extends Actions<S>>(
     const stateRef = useRef(state || value);
     const mapped = useMemo(() => Object.keys(actions).reduce(
       (previous, current) => {
-        const execute = (...args: unknown[]) => () => Promise.resolve(actions[current](...args)(stateRef.current))
-          .then((next) => {
-            if (next) {
-              stateRef.current = next;
-              update({});
-            }
-          });
+        const execute = (...args: unknown[]) => () =>
+          Promise.resolve(actions[current](...args)(stateRef.current, () => stateRef.current))
+            .then((next) => {
+              if (next) {
+                stateRef.current = next;
+                update({});
+              }
+            });
 
         const action = (...args: unknown[]) => execute(...args)();
         action.c = execute;
