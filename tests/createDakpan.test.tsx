@@ -1,4 +1,4 @@
-import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { useCallback } from 'react';
 import * as React from 'react';
 
@@ -75,9 +75,7 @@ it('should update the state', async () => {
 
   fireEvent.click(button);
 
-  await waitForDomChange();
-
-  expect(button.textContent).toEqual('2');
+  await waitFor(() => expect(button.textContent).toEqual('2'));
 });
 
 it('should update the state with the hoc', async () => {
@@ -86,9 +84,7 @@ it('should update the state with the hoc', async () => {
 
   fireEvent.click(button);
 
-  await waitForDomChange();
-
-  expect(button.textContent).toEqual('2 test');
+  await waitFor(() => expect(button.textContent).toEqual('2 test'));
 });
 
 it('should update the multiple times in a single render', async () => {
@@ -97,7 +93,5 @@ it('should update the multiple times in a single render', async () => {
 
   fireEvent.click(button);
 
-  await waitForDomChange();
-
-  expect(button.textContent).toEqual('3');
+  await waitFor(() => expect(button.textContent).toEqual('3'));
 });

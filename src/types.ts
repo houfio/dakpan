@@ -1,4 +1,4 @@
-import { ComponentType, FunctionComponent } from 'react';
+import { ComponentType, FunctionComponent, ReactNode } from 'react';
 
 export type Dakpan<S, A extends Actions<S>, I extends boolean> = [
   FunctionComponent<ProviderProps<S, I>>,
@@ -21,10 +21,12 @@ export type DakpanContext<S, A extends Actions<S>> = undefined | {
   actions: MappedActions<S, A>
 };
 
-export type ProviderProps<S, I extends boolean> = I extends true ? {} : {
+export type ProviderProps<S, I extends boolean> = {
+  children?: ReactNode
+} & (I extends true ? {} : {
   value: S,
   reinitialize?: boolean
-};
+});
 
 export type Actions<S> = {
   [action: string]: (...args: any[]) => (state: S, get: () => S) => S | undefined | Promise<S | undefined>
